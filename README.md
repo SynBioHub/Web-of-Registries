@@ -1,0 +1,2 @@
+# federator
+Manages SynBioHub federation
