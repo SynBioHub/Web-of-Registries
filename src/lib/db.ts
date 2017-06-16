@@ -20,11 +20,24 @@ const sequelize = new Sequelize('database', 'username', 'password', {
     storage: './data/registries.sqlite'
 });
 
-const SynBioHub = sequelize.define('synbiohub', {
+export interface SynBioHubAttribute {
+    uriPrefix: String,
+    instanceUrl: String,
+    updateSecret: String, 
+}
+
+export interface SynBioHubInstance extends Sequelize.Instance<SynBioHubAttribute>, SynBioHubAttribute { }
+
+export interface SynBioHubModel extends Sequelize.Model<SynBioHubInstance, SynBioHubAttribute> {};
+
+const SynBioHub = sequelize.define<SynBioHubInstance, SynBioHubAttribute>('synbiohub', {
     uriPrefix: {
         type: Sequelize.STRING
     },
     instanceUrl: {
+        type: Sequelize.STRING
+    },
+    updateSecret: {
         type: Sequelize.STRING
     }
 }, {
@@ -56,5 +69,6 @@ const umzug = new Umzug({
 
 export {
     sequelize,
-    umzug
+    umzug,
+    SynBioHub
 };

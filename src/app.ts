@@ -11,16 +11,21 @@ import * as express from 'express';
 import { list } from './api/list';
 import { register } from './api/register';
 import { remove } from './api/remove';
-import { update } from './api/update'
+import { update } from './api/update';
+import { detail } from './api/detail';
 
 
 function app(): express.Express {
     let app = express();
 
-    app.get('/list/', list);
-    app.post('/register/', register);
-    app.delete('/remove/', remove);
-    app.patch('/update/', update);
+    app.get('/instances/', list);
+    app.get('/instances/:instanceId/', detail)
+
+    app.post('/instances/new/', register);
+
+    app.delete('/instances/:instanceId/', remove);
+    
+    app.patch('/instances/:instanceId/', update);
 
     return app;
 }
