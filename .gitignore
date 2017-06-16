@@ -57,3 +57,5 @@ typings/
 # dotenv environment variables file
 .env
 
+# Federator local configuration file
+config.local.json
