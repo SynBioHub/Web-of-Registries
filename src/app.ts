@@ -9,6 +9,8 @@
 
 import * as express from 'express';
 import * as bodyParser from 'body-parser';
+import { Request, Response } from 'express';
+import { SynBioHub } from './lib/db';
 import { list } from './api/list';
 import { register } from './api/register';
 import { remove } from './api/remove';
@@ -24,11 +26,25 @@ function app(): express.Express {
 
     app.post('/instances/new/', bodyParser.json(), register);
 
-    app.delete('/instances/:instanceId/', remove);
+    app.delete('/instances/:instanceId/', bodyParser.json(), checkUpdateSecret, remove);
 
-    app.patch('/instances/:instanceId/', update);
+    app.patch('/instances/:instanceId/', bodyParser.json(), checkUpdateSecret, update);
 
     return app;
+}
+
+function checkUpdateSecret(req: Request, res: Response, next: Function) {
+    let id = req.params.instanceId;
+
+    SynBioHub.findById(id).then(synbiohub => {
+        if(synbiohub === null) {
+            res.sendStatus(404);
+        } else if (synbiohub.updateSecret === req.body.updateSecret) {
+            next();
+        } else {
+            res.sendStatus(403);
+        }
+    })
 }
 
 export {

@@ -18,16 +18,16 @@ function register(req: Request, res: Response) {
         updateSecret: crypto.randomBytes(48).toString('hex')
     }).then(synbiohub => {
         let resultJson = JSON.stringify({
-                id: synbiohub.get('id'),
-                uriPrefix: synbiohub.get('uriPrefix'),
-                instanceUrl: synbiohub.get('instanceUrl'),
-                updateSecret: synbiohub.get('updateSecret')
-            }, null, 4);
+            id: synbiohub.get('id'),
+            uriPrefix: synbiohub.get('uriPrefix'),
+            instanceUrl: synbiohub.get('instanceUrl'),
+            updateSecret: synbiohub.get('updateSecret')
+        }, null, 4);
 
         res.send(resultJson);
     }).catch(err => {
         res.status(400);
-        res.send(err)
+        res.send(err);
     });
 }
 

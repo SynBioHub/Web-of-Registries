@@ -19,7 +19,9 @@ function detail(req: Request, res: Response) {
                 id: synbiohub.get('id'),
                 uriPrefix: synbiohub.get('uriPrefix'),
                 instanceUrl: synbiohub.get('instanceUrl')
+
             }, null, 4);
+            
             res.send(resultJson);
         }
     });
