@@ -7,10 +7,19 @@
  * 16-06-2017
  */
 
+import { SynBioHub } from '../lib/db';
 import { Request, Response } from 'express'
 
 function remove(req: Request, res: Response) {
-    res.send('Removal is not yet implemented')
+    SynBioHub.findById(req.params.instanceId).then(synbiohub => {
+        if(synbiohub === null) {
+            res.sendStatus(404);
+        } else {
+            synbiohub.destroy()
+            
+            res.sendStatus(200);
+        }
+    });
 }
 
 export {
