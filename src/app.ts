@@ -8,6 +8,7 @@
  */
 
 import * as express from 'express';
+import * as bodyParser from 'body-parser';
 import { list } from './api/list';
 import { register } from './api/register';
 import { remove } from './api/remove';
@@ -21,10 +22,10 @@ function app(): express.Express {
     app.get('/instances/', list);
     app.get('/instances/:instanceId/', detail)
 
-    app.post('/instances/new/', register);
+    app.post('/instances/new/', bodyParser.json(), register);
 
     app.delete('/instances/:instanceId/', remove);
-    
+
     app.patch('/instances/:instanceId/', update);
 
     return app;

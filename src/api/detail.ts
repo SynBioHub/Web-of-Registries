@@ -15,10 +15,11 @@ function detail(req: Request, res: Response) {
         if(synbiohub === null) {
             res.sendStatus(404);
         } else {
-            let pub = synbiohub;
-            delete pub.updateSecret;
-
-            let resultJson = JSON.stringify(pub, null, 4);
+            let resultJson = JSON.stringify({
+                id: synbiohub.get('id'),
+                uriPrefix: synbiohub.get('uriPrefix'),
+                instanceUrl: synbiohub.get('instanceUrl')
+            }, null, 4);
             res.send(resultJson);
         }
     });

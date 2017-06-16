@@ -32,10 +32,12 @@ export interface SynBioHubModel extends Sequelize.Model<SynBioHubInstance, SynBi
 
 const SynBioHub = sequelize.define<SynBioHubInstance, SynBioHubAttribute>('synbiohub', {
     uriPrefix: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: false
     },
     instanceUrl: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: false
     },
     updateSecret: {
         type: Sequelize.STRING
