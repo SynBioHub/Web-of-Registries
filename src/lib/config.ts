@@ -10,8 +10,8 @@
 import *  as fs from 'fs'
 
 // Default file locations
-const configFilename = './config.json';
-const configLocalFilename = './config.local.json';
+const configFilename = './data/config.json';
+const configLocalFilename = './data/config.local.json';
 
 // Abstract schema of configuration files
 class ConfigSchema {
