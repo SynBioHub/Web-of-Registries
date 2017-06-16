@@ -1,0 +1,30 @@
+{
+  "name": "federator",
+  "version": "0.1.0",
+  "description": "Manages federated SynBioHub instances",
+  "scripts": {
+    "start": "npm run build:live",
+    "build:live": "nodemon --exec ./node_modules/.bin/ts-node -- ./index.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://www.github.com/synbiohub/federator"
+  },
+  "keywords": [
+    "synbiohub",
+    "synthetic biology",
+    "federation",
+    "web of registries"
+  ],
+  "author": "Zach Zundel",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.15.3"
+  },
+  "devDependencies": {
+    "@types/node": "^7.0.31",
+    "nodemon": "^1.11.0",
+    "ts-node": "^3.0.6",
+    "typescript": "^2.3.4"
+  }
+}
