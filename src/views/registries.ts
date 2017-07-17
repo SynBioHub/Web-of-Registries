@@ -8,7 +8,11 @@ import * as pug from 'pug';
 function registries(req: Request, res: Response) {
     let config = new Config();
 
-    SynBioHub.findAll()
+    SynBioHub.findAll({
+        where: {
+            approved: true
+        }
+    })
         .then(synbiohubs => {
             let locals = {
                 config: config.get(),
