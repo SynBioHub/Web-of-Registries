@@ -7,7 +7,8 @@
  * 16-06-2017
  */
 
-import *  as fs from 'fs'
+import * as fs from 'fs'
+import * as xtend from 'xtend';
 
 // Default file locations
 const configFilename = './data/config.json';
@@ -32,16 +33,21 @@ class Config {
     }
 
     // Get a value from the configuration object
-    public get(key: string): Object | String | Number {
-        let preset = this.config[key];
-        let local = this.configLocal[key];
+    public get(key?: string): Object | String | Number {
+        if (key !== undefined) {
+            let preset = this.config[key];
+            let local = this.configLocal[key];
 
-        // Prefer to return local, but return preset if no local value
-        if(local === undefined) {
-            return preset;
+            // Prefer to return local, but return preset if no local value
+            if(local === undefined) {
+                return preset;
+            }
+
+            return local;
+        } else {
+            return xtend(this.config, this.configLocal);
         }
 
-        return local;
     }
 
     // Set a key -- changing the local config

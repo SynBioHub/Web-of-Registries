@@ -11,12 +11,16 @@ import { Request, Response } from 'express';
 import { SynBioHub } from '../lib/db';
 
 function list(req: Request, res: Response) {
-    SynBioHub.findAll().then( synbiohubs => {
+    SynBioHub.findAll({
+        where: {
+            approved: true
+        }
+    }).then(synbiohubs => {
         let result = synbiohubs.map(synbiohub => {
             return {
                 id: synbiohub.get('id'),
                 uriPrefix: synbiohub.get('uriPrefix'),
-                instanceUrl: synbiohub.get('instanceUrl')
+                instanceUrl: synbiohub.get('instanceUrl'),
             };
         })
 

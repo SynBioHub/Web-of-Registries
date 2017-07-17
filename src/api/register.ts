@@ -12,16 +12,22 @@ import { SynBioHub } from '../lib/db';
 import * as crypto from 'crypto';
 
 function register(req: Request, res: Response) {
+
     SynBioHub.create({
         uriPrefix: req.body.uriPrefix,
         instanceUrl: req.body.instanceUrl,
-        updateSecret: crypto.randomBytes(48).toString('hex')
+        administratorEmail: req.body.administratorEmail,
+        updateEndpoint: req.body.updateEndpoint,
+        updateSecret: crypto.randomBytes(48).toString('hex'),
+        approved: false,
     }).then(synbiohub => {
         let resultJson = JSON.stringify({
             id: synbiohub.get('id'),
             uriPrefix: synbiohub.get('uriPrefix'),
             instanceUrl: synbiohub.get('instanceUrl'),
-            updateSecret: synbiohub.get('updateSecret')
+            updateSecret: synbiohub.get('updateSecret'),
+            administratorEmail: synbiohub.get('administratorEmail'),
+            updateEndpoint: synbiohub.get('updateEndpoint')
         }, null, 4);
 
         res.send(resultJson);
@@ -29,6 +35,10 @@ function register(req: Request, res: Response) {
         res.status(400);
         res.send(err);
     });
+}
+
+function validateRequest(req: Request) {
+
 }
 
 export {

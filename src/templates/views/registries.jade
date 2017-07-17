@@ -1,0 +1,30 @@
+extends ../layouts/default.jade
+
+block content
+    div.container
+        div.row
+            div.col.s12
+                h1 Connected SynBioHub Instances
+        if(synbiohubs.length == 0)
+            div.row
+                div.col.s12
+                    h5 No connected instances
+        else
+            div.row
+                for synbiohub in synbiohubs
+                    div.col.s6
+                        div.card.blue-grey.darken-1
+                            div.card-content.white-text
+                                span.card-title
+                                    a.white-text(href=synbiohub.instanceUrl) #{synbiohub.instanceUrl}
+                                p.white-text
+                                    strong URI Prefix:
+                                    span &nbsp; #{synbiohub.uriPrefix}
+                                p.white-text
+                                    strong Administrator Email:
+                                    span &nbsp; #{synbiohub.administratorEmail}
+                                p.white-text
+                                    strong Update endpoint:
+                                    span &nbsp; #{synbiohub.instanceUrl + synbiohub.updateEndpoint}
+                            div.card-action
+                                a(href="/instances/" + synbiohub.id + "/reject/") Delete

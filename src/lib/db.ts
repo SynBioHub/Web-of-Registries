@@ -20,15 +20,27 @@ const sequelize = new Sequelize('database', 'username', 'password', {
     storage: './data/registries.sqlite'
 });
 
+export interface UserAttribute {
+    email: String,
+    password: String,
+}
+
 export interface SynBioHubAttribute {
     uriPrefix: String,
     instanceUrl: String,
-    updateSecret: String, 
+    updateSecret: String,
+    approved: Boolean,
+    administratorEmail: String,
+    updateEndpoint: String,
 }
 
-export interface SynBioHubInstance extends Sequelize.Instance<SynBioHubAttribute>, SynBioHubAttribute { }
+export interface SynBioHubInstance extends Sequelize.Instance<SynBioHubAttribute>, SynBioHubAttribute { };
 
-export interface SynBioHubModel extends Sequelize.Model<SynBioHubInstance, SynBioHubAttribute> {};
+export interface SynBioHubModel extends Sequelize.Model<SynBioHubInstance, SynBioHubAttribute> { };
+
+export interface UserInstance extends Sequelize.Instance<UserAttribute>, UserAttribute { };
+
+export interface UserModel extends Sequelize.Model<UserInstance, UserAttribute> { };
 
 const SynBioHub = sequelize.define<SynBioHubInstance, SynBioHubAttribute>('synbiohub', {
     uriPrefix: {
@@ -41,7 +53,18 @@ const SynBioHub = sequelize.define<SynBioHubInstance, SynBioHubAttribute>('synbi
     },
     updateSecret: {
         type: Sequelize.STRING
-    }
+    }, 
+    approved: {
+        type: Sequelize.BOOLEAN
+    },
+    administratorEmail: {
+        type: Sequelize.STRING,
+        allowNull: false
+    }, 
+    updateEndpoint: {
+        type: Sequelize.STRING,
+        allowNull: false
+    }, 
 }, {
         validate: {
             validSynBioHub() {
@@ -49,7 +72,25 @@ const SynBioHub = sequelize.define<SynBioHubInstance, SynBioHubAttribute>('synbi
             }
         },
         freezeTableName: true
-    })
+});
+
+const User = sequelize.define<UserInstance, UserAttribute>('user', {
+    id: {
+        type: Sequelize.INTEGER,
+        primaryKey: true,
+        autoIncrement: true,
+    },
+    email: {
+        type: Sequelize.STRING,
+        allowNull: false
+    },
+    password: {
+        type: Sequelize.STRING,
+        allowNull: false
+    },
+}, {
+        freezeTableName: true
+});
 
 const umzug = new Umzug({
     storage: 'sequelize',
@@ -72,5 +113,6 @@ const umzug = new Umzug({
 export {
     sequelize,
     umzug,
-    SynBioHub
+    SynBioHub,
+    User
 };

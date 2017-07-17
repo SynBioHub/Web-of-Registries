@@ -17,7 +17,12 @@ function remove(req: Request, res: Response) {
         } else {
             synbiohub.destroy()
             
-            res.sendStatus(200);
+
+            if (req.session.user) {
+                res.redirect('/');
+            } else {
+                res.sendStatus(200);
+            }
         }
     });
 }

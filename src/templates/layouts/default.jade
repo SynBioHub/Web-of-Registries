@@ -1,0 +1,18 @@
+extends base.jade
+
+block body
+    body
+        nav
+            div.nav-wrapper
+                a.brand-logo(href="/") &nbsp;&nbsp;Web of Registries
+
+                if(user)
+                    ul#nav-mobile.right.hide-on-med-and-down
+                        li
+                            a(href="/users") Users
+                        li
+                            a(href="/registries") Registries
+                        li
+                            a(href="/logout") Logout
+            
+        block content

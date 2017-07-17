@@ -1,0 +1,57 @@
+extends ../layouts/default.jade
+
+block content
+    div.container
+        div.row
+            div.col.s12
+                h1 Users
+        if(users.length == 0)
+            div.row
+                div.col.s12
+                    h5 No users
+        else
+            div.row
+                table
+                    thead
+                        tr
+                            th ID
+                            th Email
+                            th Password
+                            th Save 
+                            th Delete
+                    tbody
+                        for u in users
+                            tr
+                                form(action="/users/", method="POST")
+                                    td #{u.id}
+                                        input(type="hidden", name="id", value=u.id)
+                                    td
+                                        div.input-field
+                                            input#email(placeholder="Email", type="email", name="email", value=u.email)
+                                            label(for="email") Email
+                                    td
+                                        div.input-field
+                                            input#password(placeholder="Password", type="password", name="password")
+                                            label(for="password") Password
+                                    td
+                                        input.waves-effect.waves-light.btn(type="submit", value="Save")
+                                    td
+                                        if(u.id == user.id)
+                                            a.waves-effect.waves-light.btn.red.darken-3.disabled
+                                                i.material-icons delete 
+                                        else
+                                            a.waves-effect.waves-light.btn.red.darken-3
+                                                i.material-icons delete 
+                        tr
+                            form#newuser(action="/users/", method="POST")
+                                td New
+                                td
+                                    div.input-field
+                                        input#email(placeholder="Email", type="email", name="email", form="newuser")
+                                        label(for="email") Email
+                                td
+                                    div.input-field
+                                        input#password(placeholder="Password", type="password", name="password", form="newuser")
+                                        label(for="password") Password
+                                td(colspan=2)
+                                    input.waves-effect.waves-light.btn(type="submit", value="Save", form="newuser")

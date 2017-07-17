@@ -1,0 +1,29 @@
+extends ../layouts/default.jade
+
+block content
+    div.container
+        div.row
+            if(usersExist)
+                h4 Login
+            else
+                h4 Create account
+        if(loginAlert)    
+            div.row
+                div.col.s12
+                    div.card-panel.red
+                        span.white-text #{loginAlert}
+            
+        div.row
+            form.col.s12(action="/login", method="POST")
+                div.row
+                    div.input-field.col.s12
+                        i.material-icons.prefix account_circle
+                        input#email(placeholder="Email", type="email", name="email")
+                        label(for="email") Email
+                div.row
+                    div.input-field.col.s12
+                        i.material-icons.prefix lock
+                        input#password(placeholder="Password", type="password", name="password")
+                        label(for="password") Password
+                div.row
+                    input.btn-large.waves-effect.waves-light(type="submit", value="Login")

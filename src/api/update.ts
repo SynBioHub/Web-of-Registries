@@ -24,8 +24,15 @@ function update(req: Request, res: Response) {
                 synbiohub.uriPrefix = req.body.uriPrefix;
             }
 
+            if (req.body.administratorEmail) {
+                synbiohub.administratorEmail = req.body.administratorEmail;
+            }
+
+            if (req.body.updateEndpoint) {
+                synbiohub.updateEndpoint = req.body.updateEndpoint;
+            }
+
             synbiohub.save().then(synbiohub => {
-                console.log("Within")
                 synbiohub.updateSecret = crypto.randomBytes(48).toString('hex');
 
                 synbiohub.save().then(synbiohub => {
@@ -33,7 +40,9 @@ function update(req: Request, res: Response) {
                         id: synbiohub.get('id'),
                         uriPrefix: synbiohub.get('uriPrefix'),
                         instanceUrl: synbiohub.get('instanceUrl'),
-                        updateSecret: synbiohub.get('updateSecret')
+                        updateSecret: synbiohub.get('updateSecret'),
+                        administratorEmail: synbiohub.get('administratorEmail'),
+                        updateEndpoint: synbiohub.get('updateEndpoint')
                     }, null, 4);
 
                     res.send(resultJson);

@@ -1,3 +1,6 @@
 {
-    "applicationPort": "9999"
+    "applicationPort": "9999",
+    "applicationSecret": "changeme",
+    "sessionSecret": "changeme",
+    "passwordSalt": "changeme"
 }
