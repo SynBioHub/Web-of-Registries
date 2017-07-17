@@ -18,11 +18,15 @@ function register(req: Request, res: Response) {
         instanceUrl: req.body.instanceUrl,
         administratorEmail: req.body.administratorEmail,
         updateEndpoint: req.body.updateEndpoint,
+        name: req.body.name,
+        description: req.body.description,
         updateSecret: crypto.randomBytes(48).toString('hex'),
         approved: false,
     }).then(synbiohub => {
         let resultJson = JSON.stringify({
             id: synbiohub.get('id'),
+            name: synbiohub.get('name'),
+            description: synbiohub.get('description'),
             uriPrefix: synbiohub.get('uriPrefix'),
             instanceUrl: synbiohub.get('instanceUrl'),
             updateSecret: synbiohub.get('updateSecret'),
@@ -35,10 +39,6 @@ function register(req: Request, res: Response) {
         res.status(400);
         res.send(err);
     });
-}
-
-function validateRequest(req: Request) {
-
 }
 
 export {

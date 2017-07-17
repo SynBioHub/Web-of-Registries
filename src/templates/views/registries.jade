@@ -16,7 +16,10 @@ block content
                         div.card.blue-grey.darken-1
                             div.card-content.white-text
                                 span.card-title
-                                    a.white-text(href=synbiohub.instanceUrl) #{synbiohub.instanceUrl}
+                                    a.white-text(href=synbiohub.instanceUrl) #{synbiohub.name}   
+                                p.white-text
+                                    strong Instance URL:
+                                    span &nbsp; #{synbiohub.instanceUrl}
                                 p.white-text
                                     strong URI Prefix:
                                     span &nbsp; #{synbiohub.uriPrefix}
@@ -26,5 +29,8 @@ block content
                                 p.white-text
                                     strong Update endpoint:
                                     span &nbsp; #{synbiohub.instanceUrl + synbiohub.updateEndpoint}
+                                p.white-text
+                                    strong Description:
+                                    span &nbsp; #{synbiohub.description}
                             div.card-action
                                 a(href="/instances/" + synbiohub.id + "/reject/") Delete

@@ -53,15 +53,9 @@ function broadcast() {
         })
 
         synbiohubs.forEach(synbiohub => {
-            let updateUrl = [synbiohub.instanceUrl, synbiohub.updateEndpoint].join();
+            let updateUrl = [synbiohub.instanceUrl, synbiohub.updateEndpoint].join('');
 
-            requests.post(updateUrl, { json: data }, (err, res, body) => {
-                if(err)
-                    console.log(err)
-                
-                if(body)
-                    console.log(body)
-            })
+            requests.post(updateUrl, { json: data }, (err, res, body) => { if(err) console.log(err) })
         })
     })
 }

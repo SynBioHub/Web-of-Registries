@@ -18,7 +18,9 @@ function detail(req: Request, res: Response) {
             let resultJson = JSON.stringify({
                 id: synbiohub.get('id'),
                 uriPrefix: synbiohub.get('uriPrefix'),
-                instanceUrl: synbiohub.get('instanceUrl')
+                instanceUrl: synbiohub.get('instanceUrl'),
+                administratorEmail: synbiohub.get('administratorEmail'),
+                approved: synbiohub.get('approved')
             }, null, 4);
 
             res.send(resultJson);

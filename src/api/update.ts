@@ -16,20 +16,16 @@ function update(req: Request, res: Response) {
         if (synbiohub === null) {
             res.sendStatus(404);
         } else {
-            if (req.body.instanceUrl) {
-                synbiohub.instanceUrl = req.body.instanceUrl;
+            if (req.body.description) {
+                synbiohub.description = req.body.description;
             }
 
-            if (req.body.uriPrefix) {
-                synbiohub.uriPrefix = req.body.uriPrefix;
+            if (req.body.name) {
+                synbiohub.name = req.body.name;
             }
 
             if (req.body.administratorEmail) {
                 synbiohub.administratorEmail = req.body.administratorEmail;
-            }
-
-            if (req.body.updateEndpoint) {
-                synbiohub.updateEndpoint = req.body.updateEndpoint;
             }
 
             synbiohub.save().then(synbiohub => {

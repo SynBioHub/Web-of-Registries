@@ -26,6 +26,8 @@ export interface UserAttribute {
 }
 
 export interface SynBioHubAttribute {
+    name: String,
+    description: String,
     uriPrefix: String,
     instanceUrl: String,
     updateSecret: String,
@@ -45,6 +47,14 @@ export interface UserModel extends Sequelize.Model<UserInstance, UserAttribute> 
 const SynBioHub = sequelize.define<SynBioHubInstance, SynBioHubAttribute>('synbiohub', {
     uriPrefix: {
         type: Sequelize.STRING,
+        allowNull: false
+    },
+    name: {
+        type: Sequelize.STRING,
+        allowNull: false
+    },
+    description: {
+        type: Sequelize.TEXT,
         allowNull: false
     },
     instanceUrl: {

@@ -21,6 +21,8 @@ function list(req: Request, res: Response) {
                 id: synbiohub.get('id'),
                 uriPrefix: synbiohub.get('uriPrefix'),
                 instanceUrl: synbiohub.get('instanceUrl'),
+                description: synbiohub.get('description'),
+                name: synbiohub.get('name')
             };
         })
 
