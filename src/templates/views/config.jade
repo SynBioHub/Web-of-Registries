@@ -1,0 +1,15 @@
+extends ../layouts/default.jade
+
+block content
+    div.container
+        form(action="/config/", method="POST")
+            div.row
+                div.col.s12
+                    h1 Configuration
+            each parameter, index in parameters
+                div.row
+                    div.input-field
+                        input(placeholder=parameter.name, type=text, name=parameter.name, id=parameter.name value=parameter.value)
+                        label.active(for=parameter.name) #{parameter.name}
+            div.row
+                input.waves-effect.waves-light.btn(type="submit", value="Save")

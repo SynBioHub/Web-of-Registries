@@ -4,7 +4,7 @@
   "description": "Manages federated SynBioHub instances",
   "scripts": {
     "start": "npm run build:live",
-    "build:live": "nodemon --exec ./node_modules/.bin/ts-node -- ./index.ts"
+    "build:live": "forever --exec ./node_modules/.bin/ts-node -- ./index.ts"
   },
   "repository": {
     "type": "git",
@@ -29,6 +29,7 @@
     "@types/umzug": "^1.8.31",
     "express": "^4.15.3",
     "express-session": "^1.15.3",
+    "forever": "^0.15.3",
     "nodemon": "^1.11.0",
     "request": "^2.81.0",
     "sequelize": "^4.1.0",

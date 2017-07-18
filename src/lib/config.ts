@@ -53,11 +53,15 @@ class Config {
     // Set a key -- changing the local config
     public set(key: string, value: Object | String | Number): void {
         // Do nothing if there's no change.
-        if(this.configLocal[key] === value || this.config[key] === value) {
+        if(this.configLocal[key] === value) {
             return
         }
 
-        this.configLocal[key] = value;
+        if(this.config[key] === value && (this.configLocal[key] && this.configLocal[key] !== value)) {
+            delete this.configLocal[key];
+        } else {
+            this.configLocal[key] = value;
+        }
 
         this.save();
     }

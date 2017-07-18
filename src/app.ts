@@ -25,6 +25,7 @@ import { registries } from './views/registries';
 import { users } from './views/users';
 import { logout } from './views/logout';
 import { deleteUser } from './views/deleteUser';
+import { config as configView } from './views/config';
 
 
 function app(): express.Express {
@@ -65,6 +66,9 @@ function app(): express.Express {
 
     app.get('/users/:userId/delete/', requireUser, deleteUser);
     app.post('/users/:userId/delete/', requireUser, bodyParser.urlencoded({ extended: true }), deleteUser);
+
+    app.get('/config/', requireUser, configView);
+    app.post('/config/', requireUser, bodyParser.urlencoded({ extended: true }), configView);
 
     app.get('/logout/', requireUser, logout);
 
