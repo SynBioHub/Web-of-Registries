@@ -24,6 +24,7 @@ import { requests } from './views/requests';
 import { registries } from './views/registries';
 import { users } from './views/users';
 import { logout } from './views/logout';
+import { deleteUser } from './views/deleteUser';
 
 
 function app(): express.Express {
@@ -60,7 +61,10 @@ function app(): express.Express {
     app.get('/registries/', requireUser, registries);
 
     app.get('/users/', requireUser, users);
-    app.post('/users/', requireUser, bodyParser.urlencoded({ extended: true }), users)
+    app.post('/users/', requireUser, bodyParser.urlencoded({ extended: true }), users);
+
+    app.get('/users/:userId/delete/', requireUser, deleteUser);
+    app.post('/users/:userId/delete/', requireUser, bodyParser.urlencoded({ extended: true }), deleteUser);
 
     app.get('/logout/', requireUser, logout);
 

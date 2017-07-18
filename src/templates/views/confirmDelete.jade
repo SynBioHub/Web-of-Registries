@@ -1,0 +1,17 @@
+extends ../layouts/default.jade
+
+block content
+    div.container
+        div.row
+            div.col.s12
+                h1 Confirm Delete
+        div.row
+            div.col.s12
+                p Are you sure you want to delete the account of #{toDelete.email}?
+        div.row
+            div.col.s2
+                form(action="/users/" + toDelete.id + "/delete/", method="POST")
+                    input.waves-effect.waves-light.btn.red.darken-3(type="submit", value="Delete")
+            div.col.s10
+                a.waves-effect.waves-light.btn(href="/users/") Cancel
+                        
