@@ -9,7 +9,9 @@
 
 import { Request, Response } from 'express';
 import { SynBioHub } from '../lib/db';
+import { broadcast } from './approve';
 import * as crypto from 'crypto';
+import * as requests from 'request';
 
 function register(req: Request, res: Response) {
 
@@ -22,7 +24,11 @@ function register(req: Request, res: Response) {
         description: req.body.description,
         updateSecret: crypto.randomBytes(48).toString('hex'),
         approved: false,
+        updateWorking: false
     }).then(synbiohub => {
+        let updateUrl = [synbiohub.instanceUrl, synbiohub.updateEndpoint].join('');
+        broadcast();
+
         let resultJson = JSON.stringify({
             id: synbiohub.get('id'),
             name: synbiohub.get('name'),

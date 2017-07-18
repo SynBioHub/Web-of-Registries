@@ -34,6 +34,7 @@ export interface SynBioHubAttribute {
     approved: Boolean,
     administratorEmail: String,
     updateEndpoint: String,
+    updateWorking: Boolean
 }
 
 export interface SynBioHubInstance extends Sequelize.Instance<SynBioHubAttribute>, SynBioHubAttribute { };
@@ -75,6 +76,10 @@ const SynBioHub = sequelize.define<SynBioHubInstance, SynBioHubAttribute>('synbi
         type: Sequelize.STRING,
         allowNull: false
     }, 
+    updateWorking: {
+        type: Sequelize.BOOLEAN,
+        allowNull: false
+    }
 }, {
         validate: {
             validSynBioHub() {
