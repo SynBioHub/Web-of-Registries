@@ -32,6 +32,12 @@ block content
                                 p.white-text
                                     strong Description:
                                     span &nbsp; !{synbiohub.description}
+                                p.white-text
+                                    strong Accessible:
+                                    if(synbiohub.updateWorking)
+                                        span &nbsp; HTTP requests successful
+                                    else
+                                        span &nbsp; HTTP requests failing
                             div.card-action
                                 a(href="/instances/" + synbiohub.id + "/approve/") Approve
                                 a(href="/instances/" + synbiohub.id + "/reject/") Reject

@@ -8,7 +8,7 @@
  */
 
 import { Request, Response } from 'express';
-import { SynBioHub } from '../lib/db';
+import { SynBioHub, SynBioHubInstance } from '../lib/db';
 import * as requests from 'request';
 
 function approve(req: Request, res: Response) {
@@ -39,7 +39,7 @@ function approve(req: Request, res: Response) {
     });
 }
 
-function broadcast() {
+function broadcast(extra?: SynBioHubInstance) {
     SynBioHub.findAll({
         where: {
             approved: true
@@ -52,8 +52,12 @@ function broadcast() {
             }
         })
 
+        if(extra !== undefined) {
+            synbiohubs = synbiohubs.concat(extra);
+        }
+
         synbiohubs.forEach(synbiohub => {
-            let updateUrl = [synbiohub.instanceUrl, synbiohub.updateEndpoint].join('');
+            let updateUrl = [synbiohub.instanceUrl, synbiohub.updateEndpoint].join('/');
 
             requests.post(updateUrl, { json: data }, (err, res, body) => {
                 if (err) {

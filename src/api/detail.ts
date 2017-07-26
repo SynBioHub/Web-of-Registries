@@ -1,7 +1,7 @@
 /* SynBioHub Federator
  * Web of Registries
  *
- * SynBioHub list endpoint
+ * SynBioHub detail endpoint
  *
  * Written by Zach Zundel
  * 16-06-2017
@@ -20,7 +20,8 @@ function detail(req: Request, res: Response) {
                 uriPrefix: synbiohub.get('uriPrefix'),
                 instanceUrl: synbiohub.get('instanceUrl'),
                 administratorEmail: synbiohub.get('administratorEmail'),
-                approved: synbiohub.get('approved')
+                approved: synbiohub.get('approved'),
+                updateWorking: synbiohub.get('updateWorking')
             }, null, 4);
 
             res.send(resultJson);

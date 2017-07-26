@@ -15,11 +15,27 @@ import * as requests from 'request';
 
 function register(req: Request, res: Response) {
 
+    let uriPrefix = req.body.uriPrefix;
+    let instanceUrl = req.body.instanceUrl;
+    let updateEndpoint = req.body.updateEndpoint;
+
+    if(uriPrefix[uriPrefix.length - 1] == '/') {
+        uriPrefix = uriPrefix.substring(0, uriPrefix.length - 1);
+    }
+
+    if(instanceUrl[instanceUrl.length - 1] == '/') {
+        instanceUrl = instanceUrl.substring(0, instanceUrl.length - 1);
+    }
+
+    if(updateEndpoint[0] == '/') {
+        updateEndpoint = updateEndpoint.substring(1);
+    }
+
     SynBioHub.create({
-        uriPrefix: req.body.uriPrefix,
-        instanceUrl: req.body.instanceUrl,
+        uriPrefix: uriPrefix,
+        instanceUrl: instanceUrl,
         administratorEmail: req.body.administratorEmail,
-        updateEndpoint: req.body.updateEndpoint,
+        updateEndpoint: updateEndpoint,
         name: req.body.name,
         description: req.body.description,
         updateSecret: crypto.randomBytes(48).toString('hex'),
@@ -27,7 +43,7 @@ function register(req: Request, res: Response) {
         updateWorking: false
     }).then(synbiohub => {
         let updateUrl = [synbiohub.instanceUrl, synbiohub.updateEndpoint].join('');
-        broadcast();
+        broadcast(synbiohub);
 
         let resultJson = JSON.stringify({
             id: synbiohub.get('id'),
