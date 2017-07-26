@@ -19,6 +19,7 @@
   "author": "Zach Zundel",
   "license": "ISC",
   "dependencies": {
+    "@types/body-parser": "^1.16.4",
     "@types/express": "^4.0.36",
     "@types/express-session": "^1.15.1",
     "@types/node": "^7.0.31",
@@ -27,13 +28,19 @@
     "@types/sequelize": "^4.0.61",
     "@types/sha1": "^1.1.0",
     "@types/umzug": "^1.8.31",
+    "@types/xtend": "^4.0.2",
+    "body-parser": "^1.17.2",
     "express": "^4.15.3",
     "express-session": "^1.15.3",
     "nodemon": "^1.11.0",
+    "pug": "^2.0.0-rc.2",
     "request": "^2.81.0",
     "sequelize": "^4.1.0",
+    "sha1": "^1.1.1",
+    "sqlite3": "^3.1.8",
     "ts-node": "^3.0.6",
     "typescript": "^2.3.4",
-    "umzug": "^2.0.1"
+    "umzug": "^2.0.1",
+    "xtend": "^4.0.1"
   }
 }
