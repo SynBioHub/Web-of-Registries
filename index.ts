@@ -10,7 +10,7 @@
 import *  as fs from 'fs'
 import { app } from './src/app';
 import { Config } from './src/lib/config';
-import {sequelize, umzug} from './src/lib/db';
+import { sequelize, umzug } from './src/lib/db';
 
 let config = new Config();
 
@@ -20,11 +20,11 @@ let port = config.get('applicationPort');
 
 
 if(!fs.existsSync('data/registries.sqlite')) {
+    // Set up database if missing, then start server
     sequelize.sync({ force: true }).then(startServer)
 } else {
-    umzug.up().then(() => {
-        startServer()
-    })
+    // Perform migrations then start server
+    umzug.up().then(startServer)
 }
 
 function startServer() {

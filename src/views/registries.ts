@@ -1,3 +1,12 @@
+/* SynBioHub Federator
+ * Web of Registries
+ *
+ * Graphical registry list page
+ *
+ * Written by Zach Zundel
+ * 16-06-2017
+ */
+
 var sha1 = require('sha1');
 
 import { Request, Response } from 'express';
