@@ -48,7 +48,8 @@ export interface UserModel extends Sequelize.Model<UserInstance, UserAttribute> 
 const SynBioHub = sequelize.define<SynBioHubInstance, SynBioHubAttribute>('synbiohub', {
     uriPrefix: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: false,
+        unique: true
     },
     name: {
         type: Sequelize.STRING,
