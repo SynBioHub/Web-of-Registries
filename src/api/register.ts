@@ -19,15 +19,15 @@ function register(req: Request, res: Response) {
     let instanceUrl = req.body.instanceUrl;
     let updateEndpoint = req.body.updateEndpoint;
 
-    if(uriPrefix[uriPrefix.length - 1] == '/') {
+    if(uriPrefix !== undefined && uriPrefix[uriPrefix.length - 1] == '/') {
         uriPrefix = uriPrefix.substring(0, uriPrefix.length - 1);
     }
 
-    if(instanceUrl[instanceUrl.length - 1] == '/') {
+    if(instanceUrl !== undefined && instanceUrl[instanceUrl.length - 1] == '/') {
         instanceUrl = instanceUrl.substring(0, instanceUrl.length - 1);
     }
 
-    if(updateEndpoint[0] == '/') {
+    if(updateEndpoint !== undefined && updateEndpoint[0] == '/') {
         updateEndpoint = updateEndpoint.substring(1);
     }
 
