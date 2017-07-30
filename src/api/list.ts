@@ -22,7 +22,10 @@ function list(req: Request, res: Response) {
                 uriPrefix: synbiohub.get('uriPrefix'),
                 instanceUrl: synbiohub.get('instanceUrl'),
                 description: synbiohub.get('description'),
-                name: synbiohub.get('name')
+                name: synbiohub.get('name'),
+                approved: synbiohub.get('approved'),
+                administratorEmail: synbiohub.get('administratorEmail'),
+                updateWorking: synbiohub.get('updateWorking')
             };
         })
 
