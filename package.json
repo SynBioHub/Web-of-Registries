@@ -30,6 +30,7 @@
     "@types/umzug": "^1.8.31",
     "@types/xtend": "^4.0.2",
     "body-parser": "^1.17.2",
+    "connect-sequelize": "^2.0.2",
     "express": "^4.15.3",
     "express-session": "^1.15.3",
     "nodemon": "^1.11.0",

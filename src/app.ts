@@ -14,7 +14,7 @@ import { Request, Response } from 'express';
 
 // Import view functions
 import { Config } from './lib/config';
-import { SynBioHub, User } from './lib/db';
+import { SynBioHub, User, sequelize } from './lib/db';
 import { list } from './api/list';
 import { register } from './api/register';
 import { remove } from './api/remove';
@@ -29,6 +29,8 @@ import { logout } from './views/logout';
 import { deleteUser } from './views/deleteUser';
 import { config as configView } from './views/config';
 
+const SequelizeStore = require('connect-sequelize')(session);
+
 
 function app(): express.Express {
     let config = new Config();
@@ -39,6 +41,7 @@ function app(): express.Express {
         secret: config.get('sessionSecret').toString(),
         resave: false,
         saveUninitialized: false,
+        store: new SequelizeStore(sequelize, {}, 'Session')
     }));
 
     // API Endpoints
