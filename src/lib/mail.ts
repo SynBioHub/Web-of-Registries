@@ -1,21 +1,20 @@
-import { SendGrid.SendGrid, Helper } from 'sendgrid';
+import * as SendGrid from 'sendgrid';
+import { Promise } from 'es6-promise';
 import { Config } from './config';
 import { UserInstance } from './db';
 
-function sendMail(user: UserInstance, subject: string, message: string) {
+function sendMail(user: UserInstance, subject: string, message: string): Promise<any> {
     let config = new Config();
-    let sendGridApiKey = config.get('sendGridApiKey');
-    
-    if(typeof sendGridApiKey !== 'string') {
-        return
-    }
+    let sendGridApiKey = config.get('sendgridApiKey');
+    let from = config.get('fromAddress');
 
-    let sg = SendGrid(sendGridApiKey);
+    let sg = SendGrid(sendGridApiKey.toString());
+    let helper = SendGrid.mail;
 
-    const fromEmail = new helper.Email(config.get('mail').fromAddress)
-    const toEmail = new helper.Email(user.email)
-    const content = new helper.Content('text/plain', message)
-    const mail = new helper.Mail(fromEmail, subject, toEmail, content)
+    const fromEmail = new helper.Email(from.toString());
+    const toEmail = new helper.Email(user.email.toString());
+    const content = new helper.Content('text/plain', message.toString());
+    const mail = new helper.Mail(fromEmail, subject, toEmail, content);
 
     var request = sg.emptyRequest({
       method: 'POST',
@@ -23,18 +22,7 @@ function sendMail(user: UserInstance, subject: string, message: string) {
       body: mail.toJSON()
     })
 
-    return new Promise((resolve, reject) => {
-
-        sg.API(request, (err, response) => {
-
-            if(err) {
-                reject(err)
-            } else {
-                resolve(response)
-            }
-
-        })
-    })
+    return sg.API(request);
 }
 
 export { 

@@ -8,7 +8,8 @@
  */
 
 import { Request, Response } from 'express';
-import { SynBioHub } from '../lib/db';
+import { SynBioHub, User } from '../lib/db';
+import { sendMail } from '../lib/mail'
 import { broadcast } from './approve';
 import * as crypto from 'crypto';
 import * as requests from 'request';
@@ -56,7 +57,13 @@ function register(req: Request, res: Response) {
             updateEndpoint: synbiohub.get('updateEndpoint')
         }, null, 4);
 
-        res.send(resultJson);
+        User.findAll().then(users => {
+            users.forEach(user => {
+                sendMail(user, "New Registry Pending Approval", "Hi! A new registry called " + synbiohub.name + " needs to be approved on the Web of Registries.");
+            })
+
+            res.send(resultJson);
+        })
     }).catch(err => {
         res.status(400);
         res.send(err);
