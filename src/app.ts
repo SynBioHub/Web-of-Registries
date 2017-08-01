@@ -10,6 +10,7 @@
 import * as express from 'express';
 import * as session from 'express-session';
 import * as bodyParser from 'body-parser';
+import * as cors from 'cors';
 import { Request, Response } from 'express';
 
 // Import view functions
@@ -43,6 +44,8 @@ function app(): express.Express {
         saveUninitialized: false,
         store: new SequelizeStore(sequelize, {}, 'Session')
     }));
+
+    app.use(cors());
 
     // API Endpoints
     app.get('/instances/', list);
@@ -87,6 +90,8 @@ function app(): express.Express {
 function checkUpdateSecret(req: Request, res: Response, next: Function) {
     let id = req.params.instanceId
 
+    console.log(req.get('updateSecret'))
+
     // Find the relevant of SynBioHub
     SynBioHub.findById(id).then(synbiohub => {
         if (synbiohub === null) {
@@ -94,6 +99,9 @@ function checkUpdateSecret(req: Request, res: Response, next: Function) {
             res.sendStatus(404);
         } else if (synbiohub.updateSecret === req.body.updateSecret) {
             // If we could find it, and the secret matches, all good
+            next();
+        } else if(synbiohub.updateSecret === req.get('updateSecret')) {
+            // Also check the URL params for the update secret
             next();
         } else if (req.session.user === undefined) {
             // If we found the SynBioHub and there was no update secret or it didn't match,
