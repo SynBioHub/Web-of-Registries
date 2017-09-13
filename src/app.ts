@@ -91,6 +91,7 @@ function checkUpdateSecret(req: Request, res: Response, next: Function) {
     let id = req.params.instanceId
 
     console.log(req.get('updateSecret'))
+    console.log(req.body.updateSecret);
 
     // Find the relevant of SynBioHub
     SynBioHub.findById(id).then(synbiohub => {

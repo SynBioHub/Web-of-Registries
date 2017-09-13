@@ -33,6 +33,8 @@ function update(req: Request, res: Response) {
 
                 synbiohub.save().then(synbiohub => {
                     let resultJson = JSON.stringify({
+                        name: synbiohub.get('name'),
+                        description: synbiohub.get('description'),
                         id: synbiohub.get('id'),
                         uriPrefix: synbiohub.get('uriPrefix'),
                         instanceUrl: synbiohub.get('instanceUrl'),
