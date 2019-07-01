@@ -5,6 +5,9 @@ This tool indexes known instances of SynBioHub and informs them about each other
 
 API documentation can be found [here](https://synbiohub.github.io/Web-of-Registries/#introduction).
 
+## Technical requirements
+This project is known to work with node.js version 8.10.0.
+
 ## Installation
 Web of Registries installation depends on Git and NodeJS, please consult their install documentation before beginning.
 
