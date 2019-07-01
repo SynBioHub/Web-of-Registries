@@ -58,7 +58,7 @@ function app(): express.Express {
 
 
     // Web of Registries Views and Actions
-    app.get('/', requireUser, requests);
+    app.get('/', registries);
     app.post('/', requireUser, bodyParser.urlencoded({ extended: true }), requests);
 
     app.get('/config/', requireUser, configView);
@@ -75,7 +75,7 @@ function app(): express.Express {
 
     app.get('/logout/', requireUser, logout);
 
-    app.get('/registries/', requireUser, registries);
+    app.get('/registries/', registries);
 
     app.get('/users/', requireUser, users);
     app.post('/users/', requireUser, bodyParser.urlencoded({ extended: true }), users);
