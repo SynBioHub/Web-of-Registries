@@ -20,23 +20,26 @@ block content
                                 p.white-text
                                     strong Instance URL:
                                     span &nbsp; #{synbiohub.instanceUrl}
-                                p.white-text
-                                    strong URI Prefix:
-                                    span &nbsp; #{synbiohub.uriPrefix}
-                                p.white-text
-                                    strong Administrator Email:
-                                    span &nbsp; #{synbiohub.administratorEmail}
-                                p.white-text
-                                    strong Update endpoint:
-                                    span &nbsp; #{synbiohub.instanceUrl + synbiohub.updateEndpoint}
+                                if(user)
+                                    p.white-text
+                                        strong URI Prefix:
+                                        span &nbsp; #{synbiohub.uriPrefix}
+                                    p.white-text
+                                        strong Administrator Email:
+                                        span &nbsp; #{synbiohub.administratorEmail}
+                                    p.white-text
+                                        strong Update endpoint:
+                                        span &nbsp; #{synbiohub.instanceUrl + synbiohub.updateEndpoint}
                                 p.white-text
                                     strong Description:
                                     span &nbsp; !{synbiohub.description}
-                                p.white-text
-                                    strong Accessible:
-                                    if(synbiohub.updateWorking)
-                                        span &nbsp; HTTP requests successful
-                                    else
-                                        span &nbsp; HTTP requests failing
-                            div.card-action
-                                a(href="/instances/" + synbiohub.id + "/reject/") Delete
+                                if(user)
+                                    p.white-text
+                                        strong Accessible:
+                                        if(synbiohub.updateWorking)
+                                            span &nbsp; HTTP requests successful
+                                        else
+                                            span &nbsp; HTTP requests failing
+                            if(user)
+                                div.card-action
+                                    a(href="/instances/" + synbiohub.id + "/reject/") Delete
