@@ -1,0 +1,7 @@
+node_modules
+
+data/config.local.json
+data/registries.sqlite
+
+LICENSE
+README.md

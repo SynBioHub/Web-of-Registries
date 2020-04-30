@@ -1,0 +1,15 @@
+version: '3.2'
+
+services:
+  wor:
+    image: synbiohub/web-of-registries:snapshot
+    volumes:
+        - type: volume
+          source: registries
+          target: /mnt
+    ports:
+      - "9999:9999"
+    restart: always
+
+volumes:
+  registries:
