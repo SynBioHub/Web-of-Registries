@@ -30,3 +30,6 @@ $ npm start
 On first startup, the Web of Registries will display a registration screen. Once you are registered, you can add or remove users, change settings, or view pending join requests.
 
 To enable email functionality, a SendGrid API key is needed.
+
+## Publishing
+This project is automatically published on each commit to the `synbiohub/web-of-registries:snapshot` tag on Docker Hub. 
