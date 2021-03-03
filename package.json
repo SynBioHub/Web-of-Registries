@@ -36,7 +36,7 @@
     "express": "^4.15.3",
     "express-session": "^1.15.3",
     "nodemon": "^1.11.0",
-    "pug": "^2.0.0-rc.2",
+    "pug": "^3.0.1",
     "request": "^2.81.0",
     "sendgrid": "^5.2.0",
     "sequelize": "^4.1.0",
